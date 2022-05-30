@@ -1,19 +1,26 @@
 package poo.phoneoperatormanager.cli.main_menu.commands;
 
+import java.text.ParseException;
+
+
 import poo.phoneoperatormanager.cli.Command;
+
 import poo.phoneoperatormanager.domain.client.Client;
+import poo.phoneoperatormanager.domain.operations.SMS;
+import poo.phoneoperatormanager.domain.operator.CoveringPercentage;
+import poo.phoneoperatormanager.domain.operator.SellAgency;
+import poo.phoneoperatormanager.domain.operator.AgencyType;
 import poo.phoneoperatormanager.domain.operations.Duration;
 import poo.phoneoperatormanager.domain.operations.PhoneCall;
-import poo.phoneoperatormanager.domain.operations.SMS;
 import poo.phoneoperatormanager.domain.operations.SmsStatus;
 import poo.phoneoperatormanager.domain.subscription.Subscription;
-import poo.phoneoperatormanager.exeptions.InvalidEmailException;
-import poo.phoneoperatormanager.exeptions.InvalidPhoneNumberException;
-import poo.phoneoperatormanager.persistence.ClientsStore;
-import poo.phoneoperatormanager.persistence.PhoneCallsStore;
-import poo.phoneoperatormanager.persistence.SmsStore;
 
-import java.text.ParseException;
+import poo.phoneoperatormanager.exeptions.InvalidEmailException;
+import poo.phoneoperatormanager.exeptions.InvalidPercentageException;
+import poo.phoneoperatormanager.exeptions.InvalidPhoneNumberException;
+
+import poo.phoneoperatormanager.persistence.*;
+
 
 public class FillDefaultDataCommand implements Command {
     
@@ -23,9 +30,11 @@ public class FillDefaultDataCommand implements Command {
             fillClients();
             fillCalls();
             fillSms();
+            fillSellAgencies();
+            fillCoveringPercentages();
             
             System.out.println("\n Data Filled Successfully.");
-        } catch (InvalidPhoneNumberException | ParseException | InvalidEmailException e) {
+        } catch (InvalidPhoneNumberException | ParseException | InvalidEmailException | InvalidPercentageException e) {
             System.out.println("\n Error while filling some Data");
         }
     }
@@ -76,5 +85,23 @@ public class FillDefaultDataCommand implements Command {
         SmsStore.save(new SMS("0511330975", "0798980975", "Hi, can you call me later", SmsStatus.SENT));
         SmsStore.save(new SMS("0606980975", "0611080975", "I appreciate your help", SmsStatus.SENT));
         SmsStore.save(new SMS("0798980975", "0606980975", "Sorry, i won't do it again", SmsStatus.RECEIVED));
+    }
+    
+    private void fillSellAgencies() throws InvalidPhoneNumberException {
+        SellAgenciesStore.save(new SellAgency("Al rahma", "Jijel", "Beb ezzouar", "0567281990", AgencyType.PRIMARY));
+        SellAgenciesStore.save(new SellAgency("Al Bassma", "Mostaganem", "Beb ezzouar", "0611180975", AgencyType.SECONDARY));
+        SellAgenciesStore.save(new SellAgency("Al Ihsan", "Annaba", "Beb ezzouar", "0511330970", AgencyType.SECONDARY));
+        SellAgenciesStore.save(new SellAgency("Al Agency", "Tissemsilt", "Beb ezzouar", "0611010975", AgencyType.PRIMARY));
+        SellAgenciesStore.save(new SellAgency("Al N3ama", "Constantine", "Beb ezzouar", "0798930975", AgencyType.SECONDARY));
+        SellAgenciesStore.save(new SellAgency("Al Batata", "Algiers", "Beb ezzouar", "0567281903", AgencyType.SECONDARY));
+        SellAgenciesStore.save(new SellAgency("Al cherba", "Bordj Bou Arreridj", "Beb ezzouar", "0611080970", AgencyType.PRIMARY));
+    }
+    
+    private void fillCoveringPercentages() throws InvalidPercentageException {
+        CoveringPercentagesStore.save(new CoveringPercentage("Jijel", 10.8));
+        CoveringPercentagesStore.save(new CoveringPercentage("Constantine", 40));
+        CoveringPercentagesStore.save(new CoveringPercentage("Bordj Bou Arreridj", 60.3));
+        CoveringPercentagesStore.save(new CoveringPercentage("Mostaganem", 80));
+        CoveringPercentagesStore.save(new CoveringPercentage("Tissemsilt", 95));
     }
 }

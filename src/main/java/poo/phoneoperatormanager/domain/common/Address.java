@@ -1,4 +1,4 @@
-package poo.phoneoperatormanager.domain.client;
+package poo.phoneoperatormanager.domain.common;
 
 public class Address {
     private String wilaya;

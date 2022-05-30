@@ -3,6 +3,7 @@ package poo.phoneoperatormanager.domain.client;
 
 import java.text.ParseException;
 
+import poo.phoneoperatormanager.domain.common.Address;
 import poo.phoneoperatormanager.domain.common.PhoneNumber;
 import poo.phoneoperatormanager.exeptions.InvalidEmailException;
 import poo.phoneoperatormanager.exeptions.InvalidPhoneNumberException;
