@@ -44,7 +44,7 @@ public class OperatorManagementMenu {
             
             commands.get(choice - 1).execute();
         } catch (InputMismatchException e) {
-            System.out.println("Please Provide a valid choice (between 1 and 9)");
+            System.out.println("Please Provide a valid choice (between 1 and 8)");
         }
         
         return false;
