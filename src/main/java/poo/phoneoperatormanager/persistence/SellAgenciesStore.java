@@ -5,6 +5,7 @@ import poo.phoneoperatormanager.domain.operator.SellAgency;
 import poo.phoneoperatormanager.exeptions.AgencyNotExistException;
 import poo.phoneoperatormanager.exeptions.PhoneNumberAlreadyExistException;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class SellAgenciesStore {
@@ -53,6 +54,10 @@ public class SellAgenciesStore {
             throw new AgencyNotExistException();
         
         return delete(phone);
+    }
+    
+    public static Collection<SellAgency> getAll() {
+        return store.values();
     }
     
     public static boolean isExist(SellAgency agency) {

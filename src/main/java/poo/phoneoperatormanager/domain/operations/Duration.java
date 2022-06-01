@@ -4,6 +4,8 @@ import poo.phoneoperatormanager.exeptions.InvalidDurationFormatException;
 import poo.phoneoperatormanager.exeptions.MinutesOutOfRangeException;
 import poo.phoneoperatormanager.exeptions.SecondsOutOfRangeException;
 
+import java.text.DecimalFormat;
+
 public class Duration {
     
     private int hours = 0;
@@ -82,6 +84,12 @@ public class Duration {
         this.seconds = seconds;
     }
     
+    public double toMinutes() {
+        int minutesInHours = hours * 60;
+        double minutesInSeconds = Double.parseDouble(new DecimalFormat("##.##").format(seconds / 60));
+        
+        return minutesInHours + minutes + minutesInSeconds;
+    }
     
     @Override
     public String toString() {
